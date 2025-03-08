@@ -1,18 +1,16 @@
-name: dir-test
+name: Directory Navigation Exercise
 on: [push]
+
 jobs:
-  directory-create:
+  directory-navigation:
     runs-on: ubuntu-latest
     steps:
-      - name: create-dir
-        run: |
-          mkdir -p /home/runner
-          cd /home/runner
-          mkdir -p test_folder
-          cd test_folder
-          touch sample.txt
-      - name: dir-change
-        working-directory: /home/runner
-        run: |
-          cd text_folder
-          cat sample.txt
+      - name: Create test_folder in /home/runner
+        run: mkdir -p /home/runner/test_folder
+        
+      - name: Create sample.txt file
+        run: echo "This is a sample text file created by GitHub Actions" > /home/runner/test_folder/sample.txt
+        
+      - name: Check file content
+        working-directory: /home/runner/test_folder
+        run: cat sample.txt
