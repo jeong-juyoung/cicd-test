@@ -1,0 +1,18 @@
+name: dir-test
+on: [push]
+jobs:
+  directory-create:
+    runs-on: ubuntu-latest
+    steps:
+      - name: create-dir
+        run: |
+          mkdir -p /home/runner
+          cd /home/runner
+          mkdir -p test_folder
+          cd test_folder
+          touch sample.txt
+      - name: dir-change
+        working-directory: /home/runner
+        run: |
+          cd text_folder
+          cat sample.txt

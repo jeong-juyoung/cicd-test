@@ -1,0 +1,38 @@
+name: windows-test
+on: [push]
+jobs:
+  shell-cmd:
+    runs-on: windows-latest
+    steps:
+      - name: uname-a cmd
+        shell: bash
+        run: uname -a
+      - name: Get-ComputerInfo
+        shell: pwsh
+        run: Get-ComputerInfo
+      - name: sys.version
+        shell: python
+        run: |
+          import sys
+          print(sys.version)
+      - name: process.version
+        shell: node {0}
+        run: |
+          <node.js>
+          console.log(process.version)
+  directory-create:
+    runs-on: windows-latest
+    steps:
+      - name: create-dir
+        run: |
+          mkdir -p /home/runner
+          cd /home/runner
+          mkdir -p test_folder
+          cd test_folder
+          touch sample.txt
+      - name: dir-change
+        working-directory: /home/runner
+        run: |
+          cd text_folder
+          cat sample.txt
+
